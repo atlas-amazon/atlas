@@ -1,1 +1,0 @@
-practicing git fetch, git pull and git clone commands
