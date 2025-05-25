@@ -1,1 +1,1 @@
-# Java training documenttion
+# Java training documentation
