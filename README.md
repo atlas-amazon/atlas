@@ -1,1 +1,1 @@
-# Java training documentation
+# amazon atlas java traing
