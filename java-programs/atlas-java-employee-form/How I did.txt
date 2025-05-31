@@ -1,0 +1,229 @@
+Install Java
+Install Maven
+
+The file structure to be maintained is
+D:\atlas\atlas-java-employee-form\
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── example
+│   │   │           └── HelloServlet.java
+│   │   └── webapp
+│   │       ├── index.jsp
+│   │       └── WEB-INF
+│   │           └── web.xml
+
+
+run "mvn clean package" in the path "D:\atlas\atlas-java-employee-form\"
+
+it will create "target" directory
+
+find war file inside the "target" directory.
+
+copy the war file inside the "webapps" directory in the apache-tomcat directory.
+
+
+pom.xml
+--------
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+       <modelVersion>4.0.0</modelVersion>
+       <groupId>com.example</groupId>
+       <artifactId>my-webapp</artifactId>
+       <version>1.0-SNAPSHOT</version>
+       <packaging>war</packaging>
+   
+       <dependencies>
+           <!-- Servlet API -->
+           <dependency>
+               <groupId>javax.servlet</groupId>
+               <artifactId>javax.servlet-api</artifactId>
+               <version>4.0.1</version>
+               <scope>provided</scope>
+           </dependency>
+           <!-- JSP API -->
+           <dependency>
+               <groupId>javax.servlet.jsp</groupId>
+               <artifactId>javax.servlet.jsp-api</artifactId>
+               <version>2.3.3</version>
+               <scope>provided</scope>
+           </dependency>
+       </dependencies>
+   
+       <build>
+           <finalName>atlas-java-employee-form</finalName>
+           <plugins>
+               <!-- Maven WAR Plugin -->
+               <plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-war-plugin</artifactId>
+                   <version>3.4.0</version>
+               </plugin>
+               <!-- Maven Compiler Plugin -->
+               <plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-compiler-plugin</artifactId>
+                   <version>3.13.0</version>
+                   <configuration>
+                       <source>21</source>
+                       <target>21</target>
+                   </configuration>
+               </plugin>
+           </plugins>
+       </build>
+   </project>
+
+
+
+index.jsp
+---------
+<html>
+     <head>
+         <title>Amazon-Atlas-Practice</title>
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+         <style>
+             body {
+                 font-family: 'Roboto', sans-serif;
+                 background-color: #f5f6f5;
+                 color: #232F3E;
+                 margin: 0;
+                 padding: 20px;
+                 display: flex;
+                 flex-direction: column;
+                 min-height: 100vh;
+             }
+             h1 {
+                 color: #FF9900;
+                 text-align: center;
+             }
+             h2 {
+                 color: #0066C0;
+                 text-align: center;
+             }
+             .form-container {
+                 background-color: #ffffff;
+                 padding: 20px;
+                 border-radius: 8px;
+                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                 max-width: 500px;
+                 margin: 0 auto;
+             }
+             label {
+                 display: block;
+                 margin: 10px 0 5px;
+                 font-weight: bold;
+                 color: #232F3E;
+             }
+             input[type="text"], input[type="number"], input[type="email"] {
+                 width: 100%;
+                 padding: 8px;
+                 margin-bottom: 10px;
+                 border: 1px solid #DDDDDD;
+                 border-radius: 4px;
+                 font-size: 16px;
+             }
+             input[type="submit"] {
+                 background-color: #FF9900;
+                 color: #ffffff;
+                 padding: 10px 20px;
+                 border: none;
+                 border-radius: 4px;
+                 cursor: pointer;
+                 font-size: 16px;
+                 width: 100%;
+             }
+             input[type="submit"]:hover {
+                 background-color: #e68a00;
+             }
+             .footer {
+                 text-align: center;
+                 margin-top: auto;
+                 padding: 20px 0;
+                 color: #555555;
+                 font-size: 14px;
+             }
+         </style>
+     </head>
+     <body>
+         <h1>Amazon-Atlas-Practice</h1>
+         <h2>Employee Information</h2>
+         <div class="form-container">
+             <form action="hello" method="post">
+                 <label for="empName">Employee Name:</label>
+                 <input type="text" id="empName" name="empName" required>
+                 
+                 <label for="empId">Employee ID:</label>
+                 <input type="text" id="empId" name="empId" required>
+                 
+                 <label for="department">Department:</label>
+                 <input type="text" id="department" name="department" required>
+                 
+                 <label for="yearsExp">Years of Experience:</label>
+                 <input type="number" id="yearsExp" name="yearsExp" min="0" required>
+                 
+                 <label for="email">Company Mail ID:</label>
+                 <input type="email" id="email" name="email" required>
+                 
+                 <input type="submit" value="Submit">
+             </form>
+         </div>
+         <div class="footer">
+             © Sushma Mainampati, 2025
+         </div>
+     </body>
+     </html>
+
+
+HelloServlet.java
+------------------
+package com.example;
+
+     import java.io.IOException;
+     import java.io.PrintWriter;
+     import javax.servlet.ServletException;
+     import javax.servlet.annotation.WebServlet;
+     import javax.servlet.http.HttpServlet;
+     import javax.servlet.http.HttpServletRequest;
+     import javax.servlet.http.HttpServletResponse;
+
+     @WebServlet("/hello")
+     public class HelloServlet extends HttpServlet {
+         protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                 throws ServletException, IOException {
+             response.setContentType("text/html");
+             PrintWriter out = response.getWriter();
+             
+             // Retrieve form parameters
+             String empName = request.getParameter("empName");
+             String empId = request.getParameter("empId");
+             String department = request.getParameter("department");
+             String yearsExp = request.getParameter("yearsExp");
+             String email = request.getParameter("email");
+             
+             // Start HTML response
+             out.println("<html><body style='font-family: Arial, sans-serif; padding: 20px;'>");
+             out.println("<h1>Employee Information Submitted</h1>");
+             out.println("<h2>Details:</h2>");
+             out.println("<p><strong>Employee Name:</strong> " + (empName != null && !empName.isEmpty() ? empName : "Not provided") + "</p>");
+             out.println("<p><strong>Employee ID:</strong> " + (empId != null && !empId.isEmpty() ? empId : "Not provided") + "</p>");
+             out.println("<p><strong>Department:</strong> " + (department != null && !department.isEmpty() ? department : "Not provided") + "</p>");
+             out.println("<p><strong>Years of Experience:</strong> " + (yearsExp != null && !yearsExp.isEmpty() ? yearsExp : "Not provided") + "</p>");
+             out.println("<p><strong>Company Mail ID:</strong> " + (email != null && !email.isEmpty() ? email : "Not provided") + "</p>");
+             out.println("<p><a href='index.jsp' style='color: #0066C0; text-decoration: none;'>Go back to form</a></p>");
+             out.println("</body></html>");
+         }
+     }
+
+
+web.xml
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+     <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+              version="4.0">
+         <display-name>My Webapp</display-name>
+     </web-app>
