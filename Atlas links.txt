@@ -1,0 +1,7 @@
+Day wise Batch 2 docs - Google Drivedrive.google.comhttps://drive.google.com/drive/folders/1p0nar8-8UL70uPgB_DJFBTT503BaYzr5
+itsupport@iiht.com
+ATLAS Batch 2 git - Google Sheetsdocs.google.comhttps://docs.google.com/spreadsheets/d/1y1753RPMqal4WxHqvdBuV4jqh5bMFWr_N4tcavWOmH8/edit?gid=0#gid=0
+Day wise Batch 2 docs - Google Drivedrive.google.comhttps://drive.google.com/drive/folders/1p0nar8-8UL70uPgB_DJFBTT503BaYzr5
+ssh -i linux.pem ec2-user@65.1.112.39
+GitHub - atlas-amazon/atlasgithub.comhttps://github.com/atlas-amazon/atlas
+Assessment Engineone.techademy.comhttps://one.techademy.com/assessment-v1/Amazon/myassessment
