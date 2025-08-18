@@ -1,58 +1,19 @@
-interface DrawingAPI {
-    void drawCircle(double x, double y, double radius);
-}
-
-class DrawingAPI1 implements DrawingAPI {
-    public void drawCircle(double x, double y, double radius) {
-        System.out.println("API1.circle at (" + x + ", " + y + ") with radius " + radius);
+class GenericClass<T> {
+    public T getValue() {
+        return null;
     }
 }
 
-class DrawingAPI2 implements DrawingAPI {
-    public void drawCircle(double x, double y, double radius) {
-        System.out.println("API2.circle at (" + x + ", " + y + ") with radius " + radius);
+class StringClass extends GenericClass<String> {
+    @Override
+    public String getValue() {
+        return "Hello from StringClass";
     }
 }
 
-abstract class Shape {
-    protected DrawingAPI drawingAPI;
-
-    protected Shape(DrawingAPI drawingAPI) {
-        this.drawingAPI = drawingAPI;
-    }
-
-    public abstract void draw();   // low-level
-    public abstract void resizeByPercentage(double pct);  
-}
-
-class CircleShape extends Shape {
-    private double x, y, radius;
-
-    public CircleShape(double x, double y, double radius, DrawingAPI drawingAPI) {
-        super(drawingAPI);
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-    }
-
-    public void draw() {
-        drawingAPI.drawCircle(x, y, radius);
-    }
-
-    public void resizeByPercentage(double pct) {
-        radius *= (1.0 + pct / 100.0);
-    }
-}
-
-public class BridgePatternDemo {
+public class BridgeMethodExample {
     public static void main(String[] args) {
-        Shape circle1 = new CircleShape(1, 2, 3, new DrawingAPI1());
-        Shape circle2 = new CircleShape(5, 7, 11, new DrawingAPI2());
-
-        circle1.resizeByPercentage(10);
-        circle1.draw();
-
-        circle2.resizeByPercentage(20);
-        circle2.draw();
+        GenericClass<String> obj = new StringClass();
+        System.out.println(obj.getValue());
     }
 }
