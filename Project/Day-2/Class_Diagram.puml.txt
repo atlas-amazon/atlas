@@ -1,0 +1,66 @@
+@startuml
+title IoT Smart Home Dashboard - Class Diagram
+
+class User {
+    - userId : String
+    - name : String
+    - email : String
+    - passwordHash : String
+    - role : String
+    + login() : void
+    + logout() : void
+    + manageScene() : void
+}
+
+class Authentication {
+    + verifyUser(userId : String, password : String) : boolean
+    + encryptData(data: String) : String
+}
+
+class Dashboard {
+    - dashboardId : String
+    - layout : String
+    - theme : String
+    + displayData() : void
+    + sendCommand(deviceId : String, action : String) : void
+    + getHistory() : List<String>
+    + notifyUser(message: String) : void
+    + updateUI() : void
+}
+
+class Device {
+    - deviceId : String
+    - name : String
+    - type : String
+    - status : String
+    - powerUsage : double
+    + turnOn() : void
+    + turnOff() : void
+    + getStatus() : String
+}
+
+class Gateway {
+    - gatewayId : String
+    - ipAddress : String
+    - protocol : String
+    + connect() : void
+    + sendData(data: String) : void
+    + receiveData() : String
+}
+
+class Sensor {
+    - sensorId : String
+    - type : String
+    - value : double
+    + readValue() : double
+    + triggerAlert() : void
+}
+
+' Relationships
+User "1" --> "*" Dashboard : owns >
+Dashboard "1" --> "*" Device : controls >
+Device "*" --> "1" Gateway : communicates >
+Gateway "1" --> "*" Sensor : reads >
+Authentication --> User : verifies >
+
+@enduml
